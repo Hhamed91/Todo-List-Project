@@ -2,16 +2,14 @@
 
 var APIKey = "166a433c57516f51dfab1f7edaed8413";
 
-// Here we are building the URL we need to query the database
 var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=san francisco&appid=" + APIKey;
 
-// We then created an AJAX call
 $.ajax({
 	url: queryURL,
 	method: "GET"
 }).then(function (data) {
 
-	console.log(data);
+	// console.log(data);
 	var K = data.main.temp;
 
 	var F = Math.ceil((K - 273.15) * 1.80 + 32);
@@ -74,7 +72,7 @@ $("input[type='text']").keypress(function (event) {
 			success: function (data) {
 				// Grab the results from the API JSON return
 				var totalresults = data.total;
-				console.log(totalresults);
+				// console.log(totalresults);
 				// If our results are greater than 0, continue
 				if (totalresults > 0) {
 					// Display a header on the page with the number of results
@@ -172,7 +170,7 @@ $("input[type='text']").keypress(function (event) {
 	}
 });
 
-//on clich trash bin, remove clear yelp results
+//on click trash bin, remove clear yelp results
 
 $(document).on("click", ".svg-inline--fa fa-trash fa-w-14", function () {
 	$("#results").empty();
