@@ -89,7 +89,11 @@ $("input[type='text']").keypress(function (event) {
 						// console.log(id);
 						var image = item.image_url;
 						var name = item.name;
-						// console.log(name);
+						
+
+						var dBtn = $(`<a target="_blank"><button> See on Yelp </button></a>`).text("See on Yelp");
+						dBtn.attr("href", item.url);
+						dBtn.attr('class', 'dBtn');
 
 
 						var rating = item.rating;
@@ -100,8 +104,10 @@ $("input[type='text']").keypress(function (event) {
 						var zipcode = item.location.zip_code;
 
 						//    Append our result into our page
-						$('#results').append('<div id="' + id + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:200px;height:150px"><br> <br> We found <b>' + name + '</b> (' + alias + ')<br>Located at: ' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br>Phone number: ' + phone + '<br>Rating' + rating + ' with ' + reviewcount + ' reviews.</div>');
+						$('#results').append('<div id="' + id + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:200px;height:150px"><br> <br> We found <b>' + name + '</b> (' + alias + ')<br>Located at: ' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br>Phone number: ' + phone + '<br>Rating' + rating + ' with ' + reviewcount +' reviews.</div>');
 						//    $('#results').append('<div id="' + id + "<br></br>" + name);
+						$('#results').append(dBtn);
+
 
 
 
