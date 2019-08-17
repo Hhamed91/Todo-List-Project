@@ -1,5 +1,6 @@
 body {
 	font-family: Roboto;
+    background-image: linear-gradient(to top, #00ccff, #9933ff 31%, #e646b6 52%, #fff9aa 77%)
 }
 
 
@@ -8,7 +9,6 @@ ul {
 	margin: 0;
 	padding: 0;
 }
-
 
 
 h1 {
@@ -81,32 +81,6 @@ input:focus{
 	text-decoration: line-through;
 }
 
-/*#bgImg {
-  background-image: url('../img/background.jpg');
-  background-size: cover;
-  background-position: center center;
-  position: relative;
-  top: 0;
-  bottom: 0;
-  height: 100vh;
-  z-index: -10;
-}*/
-
-#bgImg-Overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  height: 100%;
-  width: 100%;
-  z-index: -5;
-/*  background-color: rgba(0, 0, 0, 0.829);
-*/}
-
- @media (max-width: 800px) {
-    .container {
-      flex-direction: column-reverse;
-    }
-
 .container{
       display:inline-block;
       margin: 5px;
@@ -119,3 +93,12 @@ input:focus{
 
   
   }
+  .wrapper{
+   background: white;
+}
+
+.marquee2, .marquee1 {
+    background: red;
+    white-space: nowrap;
+    -webkit-animation: rightThenLeft 4s linear;
+}

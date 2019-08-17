@@ -1,24 +1,26 @@
- var APIKey = "166a433c57516f51dfab1f7edaed8413";
+//Weather API 
 
-    // Here we are building the URL we need to query the database
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=san francisco&appid=" + APIKey;
+var APIKey = "166a433c57516f51dfab1f7edaed8413";
 
-    // We then created an AJAX call
-    $.ajax({
-      url: queryURL,
-      method: "GET"
-    }).then(function(data) {
+// Here we are building the URL we need to query the database
+var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=san francisco&appid=" + APIKey;
 
-      console.log(data);
-      		var K = data.main.temp;
+// We then created an AJAX call
+$.ajax({
+	url: queryURL,
+	method: "GET"
+}).then(function (data) {
 
-			var F = Math.ceil((K - 273.15) * 1.80 + 32);
+	console.log(data);
+	var K = data.main.temp;
+
+	var F = Math.ceil((K - 273.15) * 1.80 + 32);
 
 
-      $('.marquee2').text("Temperature in " + data.name);	
-      $('.marquee1').text(F + " f");
-   
-    });
+	$('.marquee2').text("Temperature in " + data.name);
+	$('.marquee1').text(F + " f");
+
+});
 
 
 // Check Off Specific Todos By Clicking
@@ -99,7 +101,7 @@ $("input[type='text']").keypress(function (event) {
 						var zipcode = item.location.zip_code;
 
 						//    Append our result into our page
-						$('#results').append('<div id="' + id + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:200px;height:150px;transform:scale(1.1);cursor: pointer;"><br> <br> We found <b>' + name + '</b> (' + alias + ')<br>Located at: ' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br>Phone number: ' + phone + '<br>Rating' + rating + ' with ' + reviewcount + ' reviews.</div>');
+						$('#results').append('<div id="' + id + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:200px;height:150px"><br> <br> We found <b>' + name + '</b> (' + alias + ')<br>Located at: ' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br>Phone number: ' + phone + '<br>Rating' + rating + ' with ' + reviewcount + ' reviews.</div>');
 						//    $('#results').append('<div id="' + id + "<br></br>" + name);
 
 
@@ -110,55 +112,55 @@ $("input[type='text']").keypress(function (event) {
 
 						var db = firebase.database();
 
-						db.ref().on("value", function(snapshot) {
+						db.ref().on("value", function (snapshot) {
 							var data = snapshot.val();
-					  
+
 							$('#dbResults').empty();
-							
-							for (var key in data){
-							  
-							  var d = $('<p>');
-					  
-							  var t = key + ' - ' + data[key].favNum; 
-					  
-							  d.append(t)
-					  
-							  $('#dbResults').append(d);
+
+							for (var key in data) {
+
+								var d = $('<p>');
+
+								var t = key + ' - ' + data[key].favNum;
+
+								d.append(t)
+
+								$('#dbResults').append(d);
 							}
-						  });
-
-					  
-							db.ref("results").set({
-								placeName: name,
-								phoneNum: phone,
-								id: id,
-								alias: alias,
-								rating: rating,
-								reviewCount: reviewcount,
-								address: address
-							});
-					  
-						
+						});
 
 
-					// 	db.ref("toDoItems").push({
-					// 		todoText: todoText
-					// 	})
-					// 	db.ref("yelpData").push({
-					// 		placeName: name,
-					// 		phoneNum: phone,
-					// 		id: id,
-					// 		alias: alias,
-					// 		rating: rating,
-					// 		reviewCount: reviewcount,
-					// 		address: address
-
-					// })
+						db.ref("results").set({
+							placeName: name,
+							phoneNum: phone,
+							id: id,
+							alias: alias,
+							rating: rating,
+							reviewCount: reviewcount,
+							address: address
+						});
 
 
-					// 	db.ref().on("value", () => {
 
-					// 	})
+
+						// 	db.ref("toDoItems").push({
+						// 		todoText: todoText
+						// 	})
+						// 	db.ref("yelpData").push({
+						// 		placeName: name,
+						// 		phoneNum: phone,
+						// 		id: id,
+						// 		alias: alias,
+						// 		rating: rating,
+						// 		reviewCount: reviewcount,
+						// 		address: address
+
+						// })
+
+
+						// 	db.ref().on("value", () => {
+
+						// 	})
 
 					});
 				} else {
@@ -170,13 +172,16 @@ $("input[type='text']").keypress(function (event) {
 	}
 });
 
-$(document).on("click", ".svg-inline--fa fa-trash fa-w-14", function(){
-    $("#results").empty();
-   
+//on clich trash bin, remove clear yelp results
+
+$(document).on("click", ".svg-inline--fa fa-trash fa-w-14", function () {
+	$("#results").empty();
+
 });
+
+// toggle the form
 
 $("#toggle-form").click(function () {
 	$("input[type='text']").fadeToggle();
 });
 
-{/* Your web app's Firebase configuration */ }
