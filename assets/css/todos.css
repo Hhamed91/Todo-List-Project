@@ -81,7 +81,7 @@ input:focus{
 	text-decoration: line-through;
 }
 
-#bgImg {
+/*#bgImg {
   background-image: url('../img/background.jpg');
   background-size: cover;
   background-position: center center;
@@ -90,7 +90,7 @@ input:focus{
   bottom: 0;
   height: 100vh;
   z-index: -10;
-}
+}*/
 
 #bgImg-Overlay {
   position: absolute;
@@ -99,5 +99,23 @@ input:focus{
   height: 100%;
   width: 100%;
   z-index: -5;
-  background-color: rgba(0, 0, 0, 0.829);
-}
+/*  background-color: rgba(0, 0, 0, 0.829);
+*/}
+
+ @media (max-width: 800px) {
+    .container {
+      flex-direction: column-reverse;
+    }
+
+.container{
+      display:inline-block;
+      margin: 5px;
+ justify-content: space-between;
+      text-align:center;
+      background-color: lightgrey;
+      width: 360px;
+	margin: 100px auto;
+	background: #f7f7f7;
+
+  
+  }

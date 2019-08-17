@@ -1,7 +1,32 @@
+ var APIKey = "166a433c57516f51dfab1f7edaed8413";
+
+    // Here we are building the URL we need to query the database
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=san francisco&appid=" + APIKey;
+
+    // We then created an AJAX call
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(data) {
+
+      console.log(data);
+      		var K = data.main.temp;
+
+			var F = Math.ceil((K - 273.15) * 1.80 + 32);
+
+
+      $('.marquee2').text("Temperature in " + data.name);	
+      $('.marquee1').text(F + " f");
+   
+    });
+
+
 // Check Off Specific Todos By Clicking
 $("ul").on("click", "li", function () {
 	$(this).toggleClass("completed");
 });
+
+
 
 //Click on X to delete Todo
 $("ul").on("click", "span", function (event) {
@@ -10,6 +35,8 @@ $("ul").on("click", "span", function (event) {
 	});
 	event.stopPropagation();
 });
+
+
 
 //DB setup
 
@@ -49,7 +76,7 @@ $("input[type='text']").keypress(function (event) {
 				// If our results are greater than 0, continue
 				if (totalresults > 0) {
 					// Display a header on the page with the number of results
-					$('#results').append('<h5>We discovered ' + totalresults + ' results!</h5>');
+					// $('#results').append('<h5>We discovered ' + totalresults + ' results!</h5>');
 					// Itirate through the JSON array of 'businesses' which was returned by the API
 					$.each(data.businesses, function (i, item) {
 						// Store each business's object in a variable
@@ -72,7 +99,7 @@ $("input[type='text']").keypress(function (event) {
 						var zipcode = item.location.zip_code;
 
 						//    Append our result into our page
-						$('#results').append('<div id="' + id + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:200px;height:150px;"><br>We found <b>' + name + '</b> (' + alias + ')<br>Business ID: ' + id + '<br> Located at: ' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br>The phone number for this business is: ' + phone + '<br>This business has a rating of ' + rating + ' with ' + reviewcount + ' reviews.</div>');
+						$('#results').append('<div id="' + id + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:200px;height:150px;transform:scale(1.1);cursor: pointer;"><br> <br> We found <b>' + name + '</b> (' + alias + ')<br>Located at: ' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br>Phone number: ' + phone + '<br>Rating' + rating + ' with ' + reviewcount + ' reviews.</div>');
 						//    $('#results').append('<div id="' + id + "<br></br>" + name);
 
 
@@ -141,6 +168,11 @@ $("input[type='text']").keypress(function (event) {
 			}
 		});
 	}
+});
+
+$(document).on("click", ".svg-inline--fa fa-trash fa-w-14", function(){
+    $("#results").empty();
+   
 });
 
 $("#toggle-form").click(function () {
