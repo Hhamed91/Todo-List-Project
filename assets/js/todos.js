@@ -15,8 +15,8 @@ $.ajax({
 	var F = Math.ceil((K - 273.15) * 1.80 + 32);
 
 
-	$('.marquee2').text("Temperature in " + data.name);
-	$('.marquee1').text(F + " f");
+	$('.marquee2').text("Temperature in " + data.name + " is " + F + " f" );
+	// $('.marquee1').text(F + " f");
 
 });
 
