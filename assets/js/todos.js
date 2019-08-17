@@ -45,7 +45,7 @@ $("input[type='text']").keypress(function (event) {
 			success: function (data) {
 				// Grab the results from the API JSON return
 				var totalresults = data.total;
-				// console.log(totalresults);
+				console.log(totalresults);
 				// If our results are greater than 0, continue
 				if (totalresults > 0) {
 					// Display a header on the page with the number of results
@@ -72,7 +72,7 @@ $("input[type='text']").keypress(function (event) {
 						var zipcode = item.location.zip_code;
 
 						//    Append our result into our page
-						// $('#dbResults').append('<div id="' + id + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:200px;height:150px;"><br>We found <b>' + name + '</b> (' + alias + ')<br>Business ID: ' + id + '<br> Located at: ' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br>The phone number for this business is: ' + phone + '<br>This business has a rating of ' + rating + ' with ' + reviewcount + ' reviews.</div>');
+						$('#results').append('<div id="' + id + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:200px;height:150px;"><br>We found <b>' + name + '</b> (' + alias + ')<br>Business ID: ' + id + '<br> Located at: ' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br>The phone number for this business is: ' + phone + '<br>This business has a rating of ' + rating + ' with ' + reviewcount + ' reviews.</div>');
 						//    $('#results').append('<div id="' + id + "<br></br>" + name);
 
 
@@ -83,69 +83,55 @@ $("input[type='text']").keypress(function (event) {
 
 						var db = firebase.database();
 
-						db.ref().on("value", function (snapshot) {
+						db.ref().on("value", function(snapshot) {
 							var data = snapshot.val();
-
+					  
 							$('#dbResults').empty();
-
-							for (var results in data) {
-
-								var d = $('<p>');
-
-								var t = {
-									name: data.results.placeName,
-									// "id" : data.results.item.id,
-									// "alias" : data.results.item.alias,
-									// "phone" : data.results.item.display_phone,
-									// "image" : data.results.item.image_url,
-									// "name" : data.results.item.name,
-									// "rating" : data.results.item.rating,
-									// "reviewcount" : data.results.item.review_count,
-									// "address" : data.results.item.location.address1,
-									// "city" : data.results.item.location.city,
-									// "state" : data.results.item.location.state,
-									// "zipcode" : data.results.item.location.zip_code,
-								}
-
-								d.append(t)
-
-								//   debugger;
-								$('#dbResults').append(d);
+							
+							for (var key in data){
+							  
+							  var d = $('<p>');
+					  
+							  var t = key + ' - ' + data[key].favNum; 
+					  
+							  d.append(t)
+					  
+							  $('#dbResults').append(d);
 							}
-						});
+						  });
+
+					  
+							db.ref("results").set({
+								placeName: name,
+								phoneNum: phone,
+								id: id,
+								alias: alias,
+								rating: rating,
+								reviewCount: reviewcount,
+								address: address
+							});
+					  
+						
 
 
-						db.ref("results").set({
-							placeName: name,
-							phoneNum: phone,
-							id: id,
-							alias: alias,
-							rating: rating,
-							reviewCount: reviewcount,
-							address: address
-						});
+					// 	db.ref("toDoItems").push({
+					// 		todoText: todoText
+					// 	})
+					// 	db.ref("yelpData").push({
+					// 		placeName: name,
+					// 		phoneNum: phone,
+					// 		id: id,
+					// 		alias: alias,
+					// 		rating: rating,
+					// 		reviewCount: reviewcount,
+					// 		address: address
+
+					// })
 
 
+					// 	db.ref().on("value", () => {
 
-
-						// 	db.ref("toDoItems").push({
-						// 		todoText: todoText
-						// 	})
-						// 	db.ref("yelpData").push({
-						// 		placeName: name,
-						// 		phoneNum: phone,
-						// 		id: id,
-						// 		alias: alias,
-						// 		rating: rating,
-						// 		reviewCount: reviewcount,
-						// 		address: address
-
-						// })
-
-
-						// 	db.ref().on("value", () => {
-
-						// 	})
+					// 	})
 
 					});
 				} else {
